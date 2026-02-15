@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Routes - Mysuru Smart Bus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="bus-icon">🚌</span>
+                <span class="logo-text">Mysuru Smart Bus</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="routes.html" class="active">Routes</a></li>
+                <li><a href="timings.html">Timings</a></li>
+                <li><a href="fare.html">Fare</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>🗺️ Bus Routes</h1>
+            <p>Find your route by searching or selecting source and destination</p>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <section class="search-section">
+        <div class="container">
+            <!-- Text Search -->
+            <div class="search-box">
+                <input type="text" id="routeSearch" placeholder="Search by route number or place name...">
+                <button onclick="searchRoutes()">🔍 Search</button>
+            </div>
+
+            <!-- Source and Destination Dropdowns -->
+            <div class="filter-section">
+                <h3>Or Select Source & Destination:</h3>
+                <div class="dropdown-grid">
+                    <div class="dropdown-container">
+                        <label for="sourceSelect">From (Source):</label>
+                        <select id="sourceSelect" onchange="filterBySourceDestination()">
+                            <option value="">-- Select Source --</option>
+                            <option value="City Bus Stand">City Bus Stand</option>
+                            <option value="Mysore Palace">Mysore Palace</option>
+                            <option value="Railway Station">Railway Station</option>
+                            <option value="Kuvempunagar">Kuvempunagar</option>
+                            <option value="Chamundi Hill">Chamundi Hill</option>
+                            <option value="Gokulam">Gokulam</option>
+                            <option value="Jayanagar">Jayanagar</option>
+                            <option value="VV Mohalla">VV Mohalla</option>
+                            <option value="Hebbal">Hebbal</option>
+                            <option value="Vijayanagar">Vijayanagar</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-container">
+                        <label for="destSelect">To (Destination):</label>
+                        <select id="destSelect" onchange="filterBySourceDestination()">
+                            <option value="">-- Select Destination --</option>
+                            <option value="City Bus Stand">City Bus Stand</option>
+                            <option value="Mysore Palace">Mysore Palace</option>
+                            <option value="Railway Station">Railway Station</option>
+                            <option value="Kuvempunagar">Kuvempunagar</option>
+                            <option value="Chamundi Hill">Chamundi Hill</option>
+                            <option value="Gokulam">Gokulam</option>
+                            <option value="Jayanagar">Jayanagar</option>
+                            <option value="VV Mohalla">VV Mohalla</option>
+                            <option value="Hebbal">Hebbal</option>
+                            <option value="Vijayanagar">Vijayanagar</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="reset-btn" onclick="resetFilters()">🔄 Reset Filters</button>
+            </div>
+
+            <!-- Results Count -->
+            <div id="resultsCount" class="results-count"></div>
+        </div>
+    </section>
+
+    <!-- Routes Display Section -->
+    <section class="routes-display">
+        <div class="container">
+            <div id="routesContainer">
+                <!-- Routes will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mysuru Smart Bus</h3>
+                    <p>Making city bus travel easier for everyone</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="timings.html">Bus Timings</a></li>
+                        <li><a href="fare.html">Fare Information</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📞 Emergency: 1800-XXX-XXXX</p>
+                    <p>📧 info@mysurubus.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mysuru Smart Bus Information System | VTU IDT Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Bus routes data array
+        const busRoutes = [
+            {
+                number: '201',
+                name: 'City Bus Stand - Mysore Palace',
+                source: 'City Bus Stand',
+                destination: 'Mysore Palace',
+                stops: ['City Bus Stand', 'Shivarampet', 'Agrahara Circle', 'Mysore Palace'],
+                firstBus: '6:00 AM',
+                lastBus: '9:30 PM',
+                frequency: 'Every 15 min',
+                fare: '₹10 - ₹15'
+            },
+            {
+                number: '301',
+                name: 'Kuvempunagar - Railway Station',
+                source: 'Kuvempunagar',
+                destination: 'Railway Station',
+                stops: ['Kuvempunagar', 'Saraswathipuram', 'Suburban Bus Stand', 'Railway Station'],
+                firstBus: '5:45 AM',
+                lastBus: '10:00 PM',
+                frequency: 'Every 20 min',
+                fare: '₹12 - ₹18'
+            },
+            {
+                number: '101',
+                name: 'Chamundi Hill - City Center',
+                source: 'Chamundi Hill',
+                destination: 'City Bus Stand',
+                stops: ['Chamundi Hill', 'Chamundi Foot Hills', 'Yadavagiri', 'City Bus Stand'],
+                firstBus: '6:30 AM',
+                lastBus: '8:30 PM',
+                frequency: 'Every 30 min',
+                fare: '₹15 - ₹25'
+            },
+            {
+                number: '401',
+                name: 'Gokulam - VV Mohalla',
+                source: 'Gokulam',
+                destination: 'VV Mohalla',
+                stops: ['Gokulam', 'Kuvempunagar', 'Nazarbad', 'VV Mohalla'],
+                firstBus: '6:00 AM',
+                lastBus: '9:00 PM',
+                frequency: 'Every 25 min',
+                fare: '₹10 - ₹20'
+            },
+            {
+                number: '501',
+                name: 'Hebbal - Jayanagar',
+                source: 'Hebbal',
+                destination: 'Jayanagar',
+                stops: ['Hebbal', 'Hootagalli', 'Hinkal', 'Jayanagar'],
+                firstBus: '6:15 AM',
+                lastBus: '9:30 PM',
+                frequency: 'Every 20 min',
+                fare: '₹12 - ₹22'
+            },
+            {
+                number: '601',
+                name: 'Vijayanagar - Railway Station',
+                source: 'Vijayanagar',
+                destination: 'Railway Station',
+                stops: ['Vijayanagar', 'Bannimantap', 'Devaraja Market', 'Railway Station'],
+                firstBus: '5:30 AM',
+                lastBus: '10:30 PM',
+                frequency: 'Every 15 min',
+                fare: '₹10 - ₹18'
+            }
+        ];
+
+        let allRoutes = [...busRoutes];
+
+        // Load all routes when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchParam = urlParams.get('search');
+            
+            if (searchParam) {
+                document.getElementById('routeSearch').value = searchParam;
+                searchRoutes();
+            } else {
+                displayRoutes(allRoutes);
+            }
+        });
+
+        // Function to display routes
+        function displayRoutes(routes) {
+            const container = document.getElementById('routesContainer');
+            const resultsCount = document.getElementById('resultsCount');
+            
+            resultsCount.textContent = `Showing ${routes.length} route(s)`;
+            
+            if (routes.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">🔍</div>
+                        <h3>No routes found</h3>
+                        <p>Try different search terms or reset filters</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            routes.forEach(route => {
+                html += `
+                    <div class="route-card">
+                        <div class="route-card-header">
+                            <div class="route-number-badge">${route.number}</div>
+                            <div class="route-title">
+                                <h3>${route.name}</h3>
+                                <p class="route-path">${route.source} ➜ ${route.destination}</p>
+                            </div>
+                        </div>
+                        <div class="route-card-body">
+                            <div class="route-info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">🚏 Stops:</span>
+                                    <span class="info-value">${route.stops.join(' → ')}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">⏰ First Bus:</span>
+                                    <span class="info-value">${route.firstBus}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">🌙 Last Bus:</span>
+                                    <span class="info-value">${route.lastBus}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">⏱️ Frequency:</span>
+                                    <span class="info-value">${route.frequency}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">💰 Fare:</span>
+                                    <span class="info-value">${route.fare}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Function to search routes by text
+        function searchRoutes() {
+            const searchTerm = document.getElementById('routeSearch').value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                displayRoutes(allRoutes);
+                return;
+            }
+            
+            const filtered = allRoutes.filter(route => {
+                return route.number.toLowerCase().includes(searchTerm) ||
+                       route.name.toLowerCase().includes(searchTerm) ||
+                       route.source.toLowerCase().includes(searchTerm) ||
+                       route.destination.toLowerCase().includes(searchTerm) ||
+                       route.stops.some(stop => stop.toLowerCase().includes(searchTerm));
+            });
+            
+            displayRoutes(filtered);
+        }
+
+        // Function to filter by source and destination
+        function filterBySourceDestination() {
+            const source = document.getElementById('sourceSelect').value;
+            const destination = document.getElementById('destSelect').value;
+            
+            if (source === '' && destination === '') {
+                displayRoutes(allRoutes);
+                return;
+            }
+            
+            const filtered = allRoutes.filter(route => {
+                const matchSource = source === '' || route.source === source || route.stops.includes(source);
+                const matchDest = destination === '' || route.destination === destination || route.stops.includes(destination);
+                return matchSource && matchDest;
+            });
+            
+            displayRoutes(filtered);
+        }
+
+        // Function to reset all filters
+        function resetFilters() {
+            document.getElementById('routeSearch').value = '';
+            document.getElementById('sourceSelect').value = '';
+            document.getElementById('destSelect').value = '';
+            displayRoutes(allRoutes);
+        }
+
+        // Allow Enter key to trigger search
+        document.getElementById('routeSearch').addEventListener('keyup', searchRoutes);
+    </script>
+</body>
+</html>

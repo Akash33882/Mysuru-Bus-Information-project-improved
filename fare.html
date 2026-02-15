@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fare Information - Mysuru Smart Bus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="bus-icon">🚌</span>
+                <span class="logo-text">Mysuru Smart Bus</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="routes.html">Routes</a></li>
+                <li><a href="timings.html">Timings</a></li>
+                <li><a href="fare.html" class="active">Fare</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>💰 Fare Information</h1>
+            <p>Transparent pricing for all routes and distances</p>
+        </div>
+    </div>
+
+    <!-- Fare Calculator Section -->
+    <section class="fare-calculator-section">
+        <div class="container">
+            <div class="calculator-card">
+                <h2>🧮 Fare Calculator</h2>
+                <p>Calculate your bus fare based on distance</p>
+                
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="distanceInput">Enter Distance (in km):</label>
+                        <input type="number" id="distanceInput" min="1" max="50" placeholder="e.g., 5" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="passengerType">Passenger Type:</label>
+                        <select id="passengerType">
+                            <option value="general">General</option>
+                            <option value="student">Student (50% discount)</option>
+                            <option value="senior">Senior Citizen (Free)</option>
+                        </select>
+                    </div>
+                    <button class="calculate-btn" onclick="calculateFare()">Calculate Fare</button>
+                    
+                    <!-- Result Display -->
+                    <div id="fareResult" class="fare-result"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fare Chart Section -->
+    <section class="fare-chart-section">
+        <div class="container">
+            <h2>📊 Distance-Based Fare Chart</h2>
+            
+            <div class="fare-table-container">
+                <table class="fare-table">
+                    <thead>
+                        <tr>
+                            <th>Distance Range</th>
+                            <th>General Fare</th>
+                            <th>Student Fare</th>
+                            <th>Senior Citizen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0 - 5 km</td>
+                            <td>₹10</td>
+                            <td>₹5</td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td>6 - 10 km</td>
+                            <td>₹15</td>
+                            <td>₹8</td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td>11 - 15 km</td>
+                            <td>₹20</td>
+                            <td>₹10</td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td>16 - 20 km</td>
+                            <td>₹25</td>
+                            <td>₹13</td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td>21 - 30 km</td>
+                            <td>₹35</td>
+                            <td>₹18</td>
+                            <td>Free</td>
+                        </tr>
+                        <tr>
+                            <td>Above 30 km</td>
+                            <td>₹50</td>
+                            <td>₹25</td>
+                            <td>Free</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Route-wise Fare Section -->
+    <section class="route-fare-section">
+        <div class="container">
+            <h2>🚌 Popular Route Fares</h2>
+            
+            <div class="route-fare-grid">
+                <div class="route-fare-card">
+                    <div class="route-fare-header">
+                        <span class="route-badge">201</span>
+                        <h3>City Bus Stand - Mysore Palace</h3>
+                    </div>
+                    <div class="route-fare-body">
+                        <div class="fare-detail">
+                            <span>Distance:</span>
+                            <strong>8 km</strong>
+                        </div>
+                        <div class="fare-detail">
+                            <span>General Fare:</span>
+                            <strong>₹15</strong>
+                        </div>
+                        <div class="fare-detail">
+                            <span>Student Fare:</span>
+                            <strong>₹8</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="route-fare-card">
+                    <div class="route-fare-header">
+                        <span class="route-badge">301</span>
+                        <h3>Kuvempunagar - Railway Station</h3>
+                    </div>
+                    <div class="route-fare-body">
+                        <div class="fare-detail">
+                            <span>Distance:</span>
+                            <strong>12 km</strong>
+                        </div>
+                        <div class="fare-detail">
+                            <span>General Fare:</span>
+                            <strong>₹20</strong>
+                        </div>
+                        <div class="fare-detail">
+                            <span>Student Fare:</span>
+                            <strong>₹10</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="route-fare-card">
+                    <div class="route-fare-header">
+                        <span class="route-badge">101</span>
+                        <h3>Chamundi Hill - City Center</h3>
+                    </div>
+                    <div class="route-fare-body">
+                        <div class="fare-detail">
+                            <span>Distance:</span>
+                            <strong>18 km</strong>
+                        </div>
+                        <div class="fare-detail">
+                            <span>General Fare:</span>
+                            <strong>₹25</strong>
+                        </div>
+                        <div class="fare-detail">
+                            <span>Student Fare:</span>
+                            <strong>₹13</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="route-fare-card">
+                    <div class="route-fare-header">
+                        <span class="route-badge">601</span>
+                        <h3>Vijayanagar - Railway Station</h3>
+                    </div>
+                    <div class="route-fare-body">
+                        <div class="fare-detail">
+                            <span>Distance:</span>
+                            <strong>10 km</strong>
+                        </div>
+                        <div class="fare-detail">
+                            <span>General Fare:</span>
+                            <strong>₹15</strong>
+                        </div>
+                        <div class="fare-detail">
+                            <span>Student Fare:</span>
+                            <strong>₹8</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concession Details -->
+    <section class="concession-section">
+        <div class="container">
+            <h2>🎫 Fare Concessions & Passes</h2>
+            
+            <div class="concession-grid">
+                <div class="concession-card">
+                    <div class="concession-icon">👨‍🎓</div>
+                    <h3>Student Concession</h3>
+                    <p><strong>50% discount</strong> on regular fare</p>
+                    <p>Valid student ID card required</p>
+                    <p>Available for school and college students</p>
+                </div>
+
+                <div class="concession-card">
+                    <div class="concession-icon">👴</div>
+                    <h3>Senior Citizens</h3>
+                    <p><strong>Free travel</strong> for age 60+</p>
+                    <p>Valid age proof required</p>
+                    <p>Available on all routes</p>
+                </div>
+
+                <div class="concession-card">
+                    <div class="concession-icon">🎟️</div>
+                    <h3>Monthly Pass</h3>
+                    <p><strong>₹500</strong> - Unlimited travel</p>
+                    <p>Valid for 30 days</p>
+                    <p>Available at all bus stands</p>
+                </div>
+
+                <div class="concession-card">
+                    <div class="concession-icon">🎫</div>
+                    <h3>Daily Pass</h3>
+                    <p><strong>₹50</strong> - Unlimited travel</p>
+                    <p>Valid for one day</p>
+                    <p>Purchase from conductor</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Important Notes -->
+    <section class="notes-section">
+        <div class="container">
+            <div class="notes-card">
+                <h3>📌 Important Information</h3>
+                <ul class="notes-list">
+                    <li>✓ Carry exact change when possible to help conductors</li>
+                    <li>✓ Children below 3 years travel free (one child per adult)</li>
+                    <li>✓ Keep your ticket until you reach your destination</li>
+                    <li>✓ Student concession requires valid ID card</li>
+                    <li>✓ Monthly and daily passes are non-transferable</li>
+                    <li>✓ Fares are subject to government regulations and may change</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mysuru Smart Bus</h3>
+                    <p>Making city bus travel easier for everyone</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="routes.html">All Routes</a></li>
+                        <li><a href="timings.html">Bus Timings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📞 Emergency: 1800-XXX-XXXX</p>
+                    <p>📧 info@mysurubus.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mysuru Smart Bus Information System | VTU IDT Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Function to calculate fare based on distance and passenger type
+        function calculateFare() {
+            const distance = parseFloat(document.getElementById('distanceInput').value);
+            const passengerType = document.getElementById('passengerType').value;
+            const resultDiv = document.getElementById('fareResult');
+            
+            // Validate input
+            if (!distance || distance <= 0) {
+                resultDiv.innerHTML = `
+                    <div class="result-error">
+                        ⚠️ Please enter a valid distance
+                    </div>
+                `;
+                return;
+            }
+            
+            // Calculate base fare based on distance
+            let baseFare = 0;
+            
+            if (distance <= 5) {
+                baseFare = 10;
+            } else if (distance <= 10) {
+                baseFare = 15;
+            } else if (distance <= 15) {
+                baseFare = 20;
+            } else if (distance <= 20) {
+                baseFare = 25;
+            } else if (distance <= 30) {
+                baseFare = 35;
+            } else {
+                baseFare = 50;
+            }
+            
+            // Calculate final fare based on passenger type
+            let finalFare = baseFare;
+            let discountText = '';
+            
+            if (passengerType === 'student') {
+                finalFare = baseFare * 0.5; // 50% discount
+                discountText = '(50% Student Discount Applied)';
+            } else if (passengerType === 'senior') {
+                finalFare = 0; // Free for senior citizens
+                discountText = '(Senior Citizen - Free Travel)';
+            }
+            
+            // Display result
+            resultDiv.innerHTML = `
+                <div class="result-success">
+                    <div class="result-title">💰 Your Fare</div>
+                    <div class="result-amount">₹${finalFare}</div>
+                    <div class="result-details">
+                        <p>Distance: ${distance} km</p>
+                        ${baseFare !== finalFare ? `<p>Base Fare: ₹${baseFare}</p>` : ''}
+                        ${discountText ? `<p class="discount-text">${discountText}</p>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Allow Enter key to calculate fare
+        document.getElementById('distanceInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateFare();
+            }
+        });
+    </script>
+</body>
+</html>

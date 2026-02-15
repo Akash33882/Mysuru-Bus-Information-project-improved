@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Timings - Mysuru Smart Bus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="bus-icon">🚌</span>
+                <span class="logo-text">Mysuru Smart Bus</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="routes.html">Routes</a></li>
+                <li><a href="timings.html" class="active">Timings</a></li>
+                <li><a href="fare.html">Fare</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>⏰ Bus Timings</h1>
+            <p>Check detailed timing schedules for all routes</p>
+        </div>
+    </div>
+
+    <!-- Timings Section -->
+    <section class="timings-section">
+        <div class="container">
+            <!-- Route Selector -->
+            <div class="timing-selector">
+                <label for="routeSelect">Select Route:</label>
+                <select id="routeSelect" onchange="showTimings()">
+                    <option value="">-- Choose a Route --</option>
+                    <option value="201">Route 201 - City Bus Stand to Mysore Palace</option>
+                    <option value="301">Route 301 - Kuvempunagar to Railway Station</option>
+                    <option value="101">Route 101 - Chamundi Hill to City Center</option>
+                    <option value="401">Route 401 - Gokulam to VV Mohalla</option>
+                    <option value="501">Route 501 - Hebbal to Jayanagar</option>
+                    <option value="601">Route 601 - Vijayanagar to Railway Station</option>
+                </select>
+            </div>
+
+            <!-- Timing Display Area -->
+            <div id="timingDisplay" class="timing-display">
+                <!-- Default message -->
+                <div class="timing-placeholder">
+                    <div class="placeholder-icon">🕐</div>
+                    <h3>Select a route to view timings</h3>
+                    <p>Choose a route from the dropdown above to see detailed timing schedule</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- General Timing Information -->
+    <section class="general-info">
+        <div class="container">
+            <h2>📋 General Information</h2>
+            <div class="info-cards">
+                <div class="info-card">
+                    <h3>🌅 Morning Services</h3>
+                    <p>First buses start from <strong>5:30 AM</strong> on most routes</p>
+                    <p>Peak morning hours: 7:00 AM - 10:00 AM</p>
+                </div>
+                <div class="info-card">
+                    <h3>🌆 Evening Services</h3>
+                    <p>Last buses depart around <strong>10:30 PM</strong></p>
+                    <p>Peak evening hours: 5:00 PM - 8:00 PM</p>
+                </div>
+                <div class="info-card">
+                    <h3>📅 Service Days</h3>
+                    <p>All routes operate <strong>7 days a week</strong></p>
+                    <p>Frequency may vary on Sundays and holidays</p>
+                </div>
+                <div class="info-card">
+                    <h3>⚠️ Important Note</h3>
+                    <p>Timings may vary by <strong>±5-10 minutes</strong></p>
+                    <p>Please arrive at stop 5 minutes early</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mysuru Smart Bus</h3>
+                    <p>Making city bus travel easier for everyone</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="routes.html">All Routes</a></li>
+                        <li><a href="fare.html">Fare Information</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📞 Emergency: 1800-XXX-XXXX</p>
+                    <p>📧 info@mysurubus.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mysuru Smart Bus Information System | VTU IDT Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Timing data for different routes
+        const routeTimings = {
+            '201': {
+                name: 'Route 201: City Bus Stand - Mysore Palace',
+                frequency: '15 minutes',
+                firstBus: '6:00 AM',
+                lastBus: '9:30 PM',
+                timings: [
+                    '6:00 AM', '6:15 AM', '6:30 AM', '6:45 AM', '7:00 AM', '7:15 AM', '7:30 AM', '7:45 AM',
+                    '8:00 AM', '8:15 AM', '8:30 AM', '8:45 AM', '9:00 AM', '9:15 AM', '9:30 AM', '9:45 AM',
+                    '10:00 AM', '10:15 AM', '10:30 AM', '10:45 AM', '11:00 AM', '11:15 AM', '11:30 AM', '11:45 AM',
+                    '12:00 PM', '12:15 PM', '12:30 PM', '12:45 PM', '1:00 PM', '1:15 PM', '1:30 PM', '1:45 PM',
+                    '2:00 PM', '2:15 PM', '2:30 PM', '2:45 PM', '3:00 PM', '3:15 PM', '3:30 PM', '3:45 PM',
+                    '4:00 PM', '4:15 PM', '4:30 PM', '4:45 PM', '5:00 PM', '5:15 PM', '5:30 PM', '5:45 PM',
+                    '6:00 PM', '6:15 PM', '6:30 PM', '6:45 PM', '7:00 PM', '7:15 PM', '7:30 PM', '7:45 PM',
+                    '8:00 PM', '8:15 PM', '8:30 PM', '8:45 PM', '9:00 PM', '9:15 PM', '9:30 PM'
+                ]
+            },
+            '301': {
+                name: 'Route 301: Kuvempunagar - Railway Station',
+                frequency: '20 minutes',
+                firstBus: '5:45 AM',
+                lastBus: '10:00 PM',
+                timings: [
+                    '5:45 AM', '6:05 AM', '6:25 AM', '6:45 AM', '7:05 AM', '7:25 AM', '7:45 AM', '8:05 AM',
+                    '8:25 AM', '8:45 AM', '9:05 AM', '9:25 AM', '9:45 AM', '10:05 AM', '10:25 AM', '10:45 AM',
+                    '11:05 AM', '11:25 AM', '11:45 AM', '12:05 PM', '12:25 PM', '12:45 PM', '1:05 PM', '1:25 PM',
+                    '1:45 PM', '2:05 PM', '2:25 PM', '2:45 PM', '3:05 PM', '3:25 PM', '3:45 PM', '4:05 PM',
+                    '4:25 PM', '4:45 PM', '5:05 PM', '5:25 PM', '5:45 PM', '6:05 PM', '6:25 PM', '6:45 PM',
+                    '7:05 PM', '7:25 PM', '7:45 PM', '8:05 PM', '8:25 PM', '8:45 PM', '9:05 PM', '9:25 PM',
+                    '9:45 PM', '10:00 PM'
+                ]
+            },
+            '101': {
+                name: 'Route 101: Chamundi Hill - City Center',
+                frequency: '30 minutes',
+                firstBus: '6:30 AM',
+                lastBus: '8:30 PM',
+                timings: [
+                    '6:30 AM', '7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM',
+                    '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM',
+                    '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM',
+                    '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM'
+                ]
+            },
+            '401': {
+                name: 'Route 401: Gokulam - VV Mohalla',
+                frequency: '25 minutes',
+                firstBus: '6:00 AM',
+                lastBus: '9:00 PM',
+                timings: [
+                    '6:00 AM', '6:25 AM', '6:50 AM', '7:15 AM', '7:40 AM', '8:05 AM', '8:30 AM', '8:55 AM',
+                    '9:20 AM', '9:45 AM', '10:10 AM', '10:35 AM', '11:00 AM', '11:25 AM', '11:50 AM', '12:15 PM',
+                    '12:40 PM', '1:05 PM', '1:30 PM', '1:55 PM', '2:20 PM', '2:45 PM', '3:10 PM', '3:35 PM',
+                    '4:00 PM', '4:25 PM', '4:50 PM', '5:15 PM', '5:40 PM', '6:05 PM', '6:30 PM', '6:55 PM',
+                    '7:20 PM', '7:45 PM', '8:10 PM', '8:35 PM', '9:00 PM'
+                ]
+            },
+            '501': {
+                name: 'Route 501: Hebbal - Jayanagar',
+                frequency: '20 minutes',
+                firstBus: '6:15 AM',
+                lastBus: '9:30 PM',
+                timings: [
+                    '6:15 AM', '6:35 AM', '6:55 AM', '7:15 AM', '7:35 AM', '7:55 AM', '8:15 AM', '8:35 AM',
+                    '8:55 AM', '9:15 AM', '9:35 AM', '9:55 AM', '10:15 AM', '10:35 AM', '10:55 AM', '11:15 AM',
+                    '11:35 AM', '11:55 AM', '12:15 PM', '12:35 PM', '12:55 PM', '1:15 PM', '1:35 PM', '1:55 PM',
+                    '2:15 PM', '2:35 PM', '2:55 PM', '3:15 PM', '3:35 PM', '3:55 PM', '4:15 PM', '4:35 PM',
+                    '4:55 PM', '5:15 PM', '5:35 PM', '5:55 PM', '6:15 PM', '6:35 PM', '6:55 PM', '7:15 PM',
+                    '7:35 PM', '7:55 PM', '8:15 PM', '8:35 PM', '8:55 PM', '9:15 PM', '9:30 PM'
+                ]
+            },
+            '601': {
+                name: 'Route 601: Vijayanagar - Railway Station',
+                frequency: '15 minutes',
+                firstBus: '5:30 AM',
+                lastBus: '10:30 PM',
+                timings: [
+                    '5:30 AM', '5:45 AM', '6:00 AM', '6:15 AM', '6:30 AM', '6:45 AM', '7:00 AM', '7:15 AM',
+                    '7:30 AM', '7:45 AM', '8:00 AM', '8:15 AM', '8:30 AM', '8:45 AM', '9:00 AM', '9:15 AM',
+                    '9:30 AM', '9:45 AM', '10:00 AM', '10:15 AM', '10:30 AM', '10:45 AM', '11:00 AM', '11:15 AM',
+                    '11:30 AM', '11:45 AM', '12:00 PM', '12:15 PM', '12:30 PM', '12:45 PM', '1:00 PM', '1:15 PM',
+                    '1:30 PM', '1:45 PM', '2:00 PM', '2:15 PM', '2:30 PM', '2:45 PM', '3:00 PM', '3:15 PM',
+                    '3:30 PM', '3:45 PM', '4:00 PM', '4:15 PM', '4:30 PM', '4:45 PM', '5:00 PM', '5:15 PM',
+                    '5:30 PM', '5:45 PM', '6:00 PM', '6:15 PM', '6:30 PM', '6:45 PM', '7:00 PM', '7:15 PM',
+                    '7:30 PM', '7:45 PM', '8:00 PM', '8:15 PM', '8:30 PM', '8:45 PM', '9:00 PM', '9:15 PM',
+                    '9:30 PM', '9:45 PM', '10:00 PM', '10:15 PM', '10:30 PM'
+                ]
+            }
+        };
+
+        // Function to display timings for selected route
+        function showTimings() {
+            const routeSelect = document.getElementById('routeSelect');
+            const selectedRoute = routeSelect.value;
+            const displayArea = document.getElementById('timingDisplay');
+            
+            if (selectedRoute === '') {
+                displayArea.innerHTML = `
+                    <div class="timing-placeholder">
+                        <div class="placeholder-icon">🕐</div>
+                        <h3>Select a route to view timings</h3>
+                        <p>Choose a route from the dropdown above to see detailed timing schedule</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const route = routeTimings[selectedRoute];
+            
+            let html = `
+                <div class="timing-card">
+                    <div class="timing-header">
+                        <h2>${route.name}</h2>
+                        <div class="timing-info-row">
+                            <div class="timing-info-item">
+                                <span class="label">⏰ First Bus:</span>
+                                <span class="value">${route.firstBus}</span>
+                            </div>
+                            <div class="timing-info-item">
+                                <span class="label">🌙 Last Bus:</span>
+                                <span class="value">${route.lastBus}</span>
+                            </div>
+                            <div class="timing-info-item">
+                                <span class="label">⏱️ Frequency:</span>
+                                <span class="value">Every ${route.frequency}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timing-table-container">
+                        <h3>📅 Departure Times</h3>
+                        <table class="timing-table">
+                            <thead>
+                                <tr>
+                                    <th>Morning</th>
+                                    <th>Afternoon</th>
+                                    <th>Evening</th>
+                                    <th>Night</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+            
+            // Organize timings by time of day
+            const morning = route.timings.filter(t => {
+                const hour = parseInt(t.split(':')[0]);
+                const period = t.includes('PM') ? 'PM' : 'AM';
+                return period === 'AM' && hour < 12;
+            });
+            
+            const afternoon = route.timings.filter(t => {
+                const hour = parseInt(t.split(':')[0]);
+                const period = t.includes('PM') ? 'PM' : 'AM';
+                return period === 'PM' && hour >= 12 && hour < 5;
+            });
+            
+            const evening = route.timings.filter(t => {
+                const hour = parseInt(t.split(':')[0]);
+                const period = t.includes('PM') ? 'PM' : 'AM';
+                return period === 'PM' && hour >= 5 && hour < 9;
+            });
+            
+            const night = route.timings.filter(t => {
+                const hour = parseInt(t.split(':')[0]);
+                const period = t.includes('PM') ? 'PM' : 'AM';
+                return period === 'PM' && hour >= 9;
+            });
+            
+            const maxRows = Math.max(morning.length, afternoon.length, evening.length, night.length);
+            
+            for (let i = 0; i < maxRows; i++) {
+                html += `
+                    <tr>
+                        <td>${morning[i] || '-'}</td>
+                        <td>${afternoon[i] || '-'}</td>
+                        <td>${evening[i] || '-'}</td>
+                        <td>${night[i] || '-'}</td>
+                    </tr>
+                `;
+            }
+            
+            html += `
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            
+            displayArea.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

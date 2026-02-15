@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Mysuru Smart Bus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="bus-icon">🚌</span>
+                <span class="logo-text">Mysuru Smart Bus</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="routes.html">Routes</a></li>
+                <li><a href="timings.html">Timings</a></li>
+                <li><a href="fare.html">Fare</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>📞 Contact Us</h1>
+            <p>We're here to help - Emergency contacts and support</p>
+        </div>
+    </div>
+
+    <!-- Emergency Contact Section -->
+    <section class="emergency-section">
+        <div class="container">
+            <h2>🚨 Emergency Contacts</h2>
+            <div class="emergency-grid">
+                <div class="emergency-card">
+                    <div class="emergency-icon">📞</div>
+                    <h3>24/7 Helpline</h3>
+                    <a href="tel:1800-XXX-XXXX" class="emergency-number">1800-XXX-XXXX</a>
+                    <p>For emergencies and urgent assistance</p>
+                </div>
+
+                <div class="emergency-card">
+                    <div class="emergency-icon">🚓</div>
+                    <h3>Bus Depot Control Room</h3>
+                    <a href="tel:0821-2234567" class="emergency-number">0821-2234567</a>
+                    <p>Main control center</p>
+                </div>
+
+                <div class="emergency-card">
+                    <div class="emergency-icon">🚨</div>
+                    <h3>Lost & Found</h3>
+                    <a href="tel:0821-2234589" class="emergency-number">0821-2234589</a>
+                    <p>Report lost items</p>
+                </div>
+
+                <div class="emergency-card">
+                    <div class="emergency-icon">👮</div>
+                    <h3>Police Emergency</h3>
+                    <a href="tel:100" class="emergency-number">100</a>
+                    <p>For security issues</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section class="contact-info-section">
+        <div class="container">
+            <h2>📍 Contact Information</h2>
+            <div class="contact-info-grid">
+                <div class="contact-info-card">
+                    <h3>📧 Email</h3>
+                    <p><a href="mailto:info@mysurubus.com">info@mysurubus.com</a></p>
+                    <p><a href="mailto:support@mysurubus.com">support@mysurubus.com</a></p>
+                </div>
+
+                <div class="contact-info-card">
+                    <h3>🏢 Head Office</h3>
+                    <p>Mysuru City Bus Depot</p>
+                    <p>Bannimantap, Mysuru - 570015</p>
+                    <p>Karnataka, India</p>
+                </div>
+
+                <div class="contact-info-card">
+                    <h3>🕐 Office Hours</h3>
+                    <p><strong>Monday - Saturday:</strong></p>
+                    <p>9:00 AM - 6:00 PM</p>
+                    <p><strong>Sunday:</strong> Closed</p>
+                </div>
+
+                <div class="contact-info-card">
+                    <h3>🌐 Social Media</h3>
+                    <p>Facebook: /MysuruBus</p>
+                    <p>Twitter: @MysuruBus</p>
+                    <p>Instagram: @MysuruBus</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Form Section -->
+    <section class="feedback-section">
+        <div class="container">
+            <div class="feedback-container">
+                <h2>💬 Send Us Your Feedback</h2>
+                <p class="feedback-subtitle">We value your opinion and suggestions</p>
+
+                <!-- Feedback Form -->
+                <form id="feedbackForm" class="feedback-form" onsubmit="return submitFeedback(event)">
+                    <!-- Name Field -->
+                    <div class="form-group">
+                        <label for="userName">Full Name: <span class="required">*</span></label>
+                        <input type="text" id="userName" name="userName" placeholder="Enter your name">
+                        <span class="error-message" id="nameError"></span>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="form-group">
+                        <label for="userEmail">Email Address: <span class="required">*</span></label>
+                        <input type="email" id="userEmail" name="userEmail" placeholder="your.email@example.com">
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+
+                    <!-- Phone Field -->
+                    <div class="form-group">
+                        <label for="userPhone">Phone Number: <span class="required">*</span></label>
+                        <input type="tel" id="userPhone" name="userPhone" placeholder="10-digit mobile number">
+                        <span class="error-message" id="phoneError"></span>
+                    </div>
+
+                    <!-- Feedback Type -->
+                    <div class="form-group">
+                        <label for="feedbackType">Feedback Type: <span class="required">*</span></label>
+                        <select id="feedbackType" name="feedbackType">
+                            <option value="">-- Select Type --</option>
+                            <option value="complaint">Complaint</option>
+                            <option value="suggestion">Suggestion</option>
+                            <option value="appreciation">Appreciation</option>
+                            <option value="query">General Query</option>
+                        </select>
+                        <span class="error-message" id="typeError"></span>
+                    </div>
+
+                    <!-- Route Number (Optional) -->
+                    <div class="form-group">
+                        <label for="routeNumber">Route Number (if applicable):</label>
+                        <input type="text" id="routeNumber" name="routeNumber" placeholder="e.g., 201, 301">
+                    </div>
+
+                    <!-- Message Field -->
+                    <div class="form-group">
+                        <label for="userMessage">Your Message: <span class="required">*</span></label>
+                        <textarea id="userMessage" name="userMessage" rows="5" placeholder="Please share your feedback in detail..."></textarea>
+                        <span class="error-message" id="messageError"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn">📤 Submit Feedback</button>
+                </form>
+
+                <!-- Success Message (Hidden by default) -->
+                <div id="successMessage" class="success-message" style="display: none;">
+                    <div class="success-icon">✅</div>
+                    <h3>Thank you for your feedback!</h3>
+                    <p>Your message has been received. We'll get back to you within 24-48 hours.</p>
+                    <button onclick="resetForm()" class="reset-form-btn">Submit Another Feedback</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>❓ Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-card">
+                    <h3>How do I check bus timings?</h3>
+                    <p>Visit our <a href="timings.html">Timings page</a> and select your route to view detailed schedules.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>What if I lose something in the bus?</h3>
+                    <p>Contact our Lost & Found department at 0821-2234589 with bus route and approximate time.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>How can I get a monthly bus pass?</h3>
+                    <p>Monthly passes are available at all major bus stands. Carry ID proof and passport size photo.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>Are senior citizens eligible for free travel?</h3>
+                    <p>Yes, senior citizens (60+) can travel free on all routes with valid age proof.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mysuru Smart Bus</h3>
+                    <p>Making city bus travel easier for everyone</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="routes.html">All Routes</a></li>
+                        <li><a href="timings.html">Bus Timings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📞 Emergency: 1800-XXX-XXXX</p>
+                    <p>📧 info@mysurubus.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mysuru Smart Bus Information System | VTU IDT Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Form validation and submission function
+        function submitFeedback(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('userName').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            const phone = document.getElementById('userPhone').value.trim();
+            const type = document.getElementById('feedbackType').value;
+            const message = document.getElementById('userMessage').value.trim();
+            
+            clearErrors();
+            
+            let isValid = true;
+            
+            // Validate Name
+            if (name === '') {
+                showError('nameError', 'Name is required');
+                isValid = false;
+            } else if (name.length < 3) {
+                showError('nameError', 'Name must be at least 3 characters');
+                isValid = false;
+            } else if (!/^[a-zA-Z\s]+$/.test(name)) {
+                showError('nameError', 'Name should contain only letters');
+                isValid = false;
+            }
+            
+            // Validate Email
+            if (email === '') {
+                showError('emailError', 'Email is required');
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showError('emailError', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            // Validate Phone
+            if (phone === '') {
+                showError('phoneError', 'Phone number is required');
+                isValid = false;
+            } else if (!/^\d{10}$/.test(phone)) {
+                showError('phoneError', 'Phone number must be exactly 10 digits');
+                isValid = false;
+            }
+            
+            // Validate Feedback Type
+            if (type === '') {
+                showError('typeError', 'Please select a feedback type');
+                isValid = false;
+            }
+            
+            // Validate Message
+            if (message === '') {
+                showError('messageError', 'Message is required');
+                isValid = false;
+            } else if (message.length < 10) {
+                showError('messageError', 'Message must be at least 10 characters');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                document.getElementById('feedbackForm').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                console.log('Form Data:', { name, email, phone, type, message });
+            }
+            
+            return false;
+        }
+        
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            
+            const inputId = elementId.replace('Error', '');
+            const inputElement = document.getElementById(inputId);
+            if (inputElement) {
+                inputElement.style.borderColor = '#e74c3c';
+            }
+        }
+        
+        function clearErrors() {
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(element => {
+                element.textContent = '';
+                element.style.display = 'none';
+            });
+            
+            const inputs = document.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.style.borderColor = '#ddd';
+            });
+        }
+        
+        function resetForm() {
+            document.getElementById('feedbackForm').reset();
+            document.getElementById('feedbackForm').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            clearErrors();
+        }
+        
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('input', function() {
+                const errorId = this.id + 'Error';
+                const errorElement = document.getElementById(errorId);
+                if (errorElement) {
+                    errorElement.textContent = '';
+                    errorElement.style.display = 'none';
+                    this.style.borderColor = '#ddd';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

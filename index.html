@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mysuru Smart Bus Information System - Home</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar - Common across all pages -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="bus-icon">🚌</span>
+                <span class="logo-text">Mysuru Smart Bus</span>
+            </div>
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="routes.html">Routes</a></li>
+                <li><a href="timings.html">Timings</a></li>
+                <li><a href="fare.html">Fare</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <!-- Mobile Menu Toggle Button -->
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Mysuru Smart Bus Information System</h1>
+            <p>Your Complete Guide to Mysuru City Bus Services</p>
+            <p class="hero-subtitle">Find routes, timings, fares and plan your journey with ease</p>
+            <!-- Search Section -->
+            <div class="hero-search">
+                <div class="search-container">
+                    <input type="text" id="quickSearch" placeholder="Search for bus routes...">
+                    <button onclick="performQuickSearch()">🔍 Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🚌</div>
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Total Routes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏰</div>
+                    <div class="stat-number">5:30 AM</div>
+                    <div class="stat-label">First Bus</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🌙</div>
+                    <div class="stat-number">10:30 PM</div>
+                    <div class="stat-label">Last Bus</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📍</div>
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Bus Stops</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Next Bus Arrival Section -->
+    <section class="next-bus-section">
+        <div class="container">
+            <h2>⏱️ Next Bus Arrival (Sample Data)</h2>
+            <div class="next-bus-grid">
+                <!-- Sample arrival data cards -->
+                <div class="arrival-card">
+                    <div class="arrival-route">Route 201</div>
+                    <div class="arrival-destination">City Bus Stand ↔ Mysore Palace</div>
+                    <div class="arrival-time">
+                        <span class="time-badge live">Arriving in 5 min</span>
+                    </div>
+                </div>
+                <div class="arrival-card">
+                    <div class="arrival-route">Route 301</div>
+                    <div class="arrival-destination">Kuvempunagar ↔ Railway Station</div>
+                    <div class="arrival-time">
+                        <span class="time-badge">Arriving in 12 min</span>
+                    </div>
+                </div>
+                <div class="arrival-card">
+                    <div class="arrival-route">Route 101</div>
+                    <div class="arrival-destination">Chamundi Hill ↔ City Center</div>
+                    <div class="arrival-time">
+                        <span class="time-badge">Arriving in 18 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Routes Section -->
+    <section class="popular-routes">
+        <div class="container">
+            <h2>🔥 Popular Routes</h2>
+            <div class="routes-grid" id="popularRoutes">
+                <!-- Routes will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2>Why Choose Our System?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Easy Search</h3>
+                    <p>Find bus routes quickly by source and destination</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3>Live Timings</h3>
+                    <p>Check real-time bus schedules and frequencies</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Fare Calculator</h3>
+                    <p>Know exact fare before you travel</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Access from any device, anywhere, anytime</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mysuru Smart Bus</h3>
+                    <p>Making city bus travel easier for everyone</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="routes.html">All Routes</a></li>
+                        <li><a href="timings.html">Bus Timings</a></li>
+                        <li><a href="fare.html">Fare Information</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📞 Emergency: 1800-XXX-XXXX</p>
+                    <p>📧 info@mysurubus.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mysuru Smart Bus Information System | VTU IDT Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+    <!-- Script for home page specific functionality -->
+    <script>
+        // Load popular routes when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            loadPopularRoutes();
+        });
+
+        // Function to load popular routes on home page
+        function loadPopularRoutes() {
+            const container = document.getElementById('popularRoutes');
+            
+            // Sample popular routes data
+            const popularRoutes = [
+                { number: '201', name: 'City Bus Stand - Mysore Palace', frequency: 'Every 15 min' },
+                { number: '301', name: 'Kuvempunagar - Railway Station', frequency: 'Every 20 min' },
+                { number: '101', name: 'Chamundi Hill - City Center', frequency: 'Every 30 min' }
+            ];
+            
+            // Generate HTML for each route
+            let html = '';
+            popularRoutes.forEach(route => {
+                html += `
+                    <div class="route-card-small">
+                        <div class="route-badge">${route.number}</div>
+                        <div class="route-details-small">
+                            <h4>${route.name}</h4>
+                            <p>⏱️ ${route.frequency}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Quick search function
+        function performQuickSearch() {
+            const searchTerm = document.getElementById('quickSearch').value.trim();
+            if (searchTerm) {
+                // Redirect to routes page with search parameter
+                window.location.href = `routes.html?search=${encodeURIComponent(searchTerm)}`;
+            }
+        }
+
+        // Allow Enter key to trigger search
+        document.getElementById('quickSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performQuickSearch();
+            }
+        });
+    </script>
+</body>
+</html>

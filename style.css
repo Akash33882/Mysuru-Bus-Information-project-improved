@@ -1,0 +1,1541 @@
+/* ========================================
+   MYSURU SMART BUS INFORMATION SYSTEM
+   Main Stylesheet - Complete CSS
+   ======================================== */
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.bus-icon {
+    font-size: 1.8rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 0;
+}
+
+.nav-menu li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    display: block;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.nav-menu li a:hover,
+.nav-menu li a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.hero-search {
+    max-width: 600px;
+    margin: 2rem auto 0;
+}
+
+.search-container {
+    display: flex;
+    gap: 10px;
+    background: white;
+    padding: 0.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.search-container input {
+    flex: 1;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 50px;
+    outline: none;
+}
+
+.search-container button {
+    background: #1e3c72;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.search-container button:hover {
+    background: #2a5298;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Statistics Section */
+.stats-section {
+    padding: 3rem 0;
+    background: white;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1e3c72;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Next Bus Section */
+.next-bus-section {
+    padding: 3rem 0;
+    background: #f5f7fa;
+}
+
+.next-bus-section h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.next-bus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.arrival-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #1e3c72;
+}
+
+.arrival-route {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #1e3c72;
+    margin-bottom: 0.5rem;
+}
+
+.arrival-destination {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.arrival-time {
+    text-align: right;
+}
+
+.time-badge {
+    display: inline-block;
+    background: #e3f2fd;
+    color: #1e3c72;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.time-badge.live {
+    background: #4caf50;
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Popular Routes */
+.popular-routes {
+    padding: 3rem 0;
+    background: white;
+}
+
+.popular-routes h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.routes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.route-card-small {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.route-card-small:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.route-badge {
+    background: #1e3c72;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.route-details-small h4 {
+    color: #333;
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+}
+
+.route-details-small p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Features Section */
+.features-section {
+    padding: 3rem 0;
+    background: #f5f7fa;
+}
+
+.features-section h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    color: #1e3c72;
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Search Section */
+.search-section {
+    padding: 2rem 0;
+    background: white;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-box input:focus {
+    border-color: #1e3c72;
+}
+
+.search-box button {
+    background: #1e3c72;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.search-box button:hover {
+    background: #2a5298;
+}
+
+.filter-section {
+    background: #f5f7fa;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.filter-section h3 {
+    color: #1e3c72;
+    margin-bottom: 1rem;
+}
+
+.dropdown-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.dropdown-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.dropdown-container select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.dropdown-container select:focus {
+    border-color: #1e3c72;
+}
+
+.reset-btn {
+    background: #f44336;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.reset-btn:hover {
+    background: #d32f2f;
+}
+
+.results-count {
+    color: #666;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+/* Routes Display */
+.routes-display {
+    padding: 2rem 0;
+    background: #f5f7fa;
+}
+
+.route-card {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.route-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.route-card-header {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.route-number-badge {
+    background: white;
+    color: #1e3c72;
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.route-title h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.route-path {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.route-card-body {
+    padding: 1.5rem;
+}
+
+.route-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.info-label {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.info-value {
+    color: #333;
+    font-weight: 500;
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 12px;
+}
+
+.no-results-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.no-results h3 {
+    color: #1e3c72;
+    margin-bottom: 0.5rem;
+}
+
+.no-results p {
+    color: #666;
+}
+
+/* Timings Section */
+.timings-section {
+    padding: 2rem 0;
+    background: white;
+}
+
+.timing-selector {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.timing-selector label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.timing-selector select {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.timing-display {
+    min-height: 300px;
+}
+
+.timing-placeholder {
+    text-align: center;
+    padding: 3rem;
+    background: #f5f7fa;
+    border-radius: 12px;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.timing-placeholder h3 {
+    color: #1e3c72;
+    margin-bottom: 0.5rem;
+}
+
+.timing-placeholder p {
+    color: #666;
+}
+
+.timing-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.timing-header {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 2rem;
+}
+
+.timing-header h2 {
+    margin-bottom: 1rem;
+}
+
+.timing-info-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.timing-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.timing-info-item .label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.timing-info-item .value {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.timing-table-container {
+    padding: 2rem;
+}
+
+.timing-table-container h3 {
+    color: #1e3c72;
+    margin-bottom: 1rem;
+}
+
+.timing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.timing-table thead {
+    background: #1e3c72;
+    color: white;
+}
+
+.timing-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.timing-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.timing-table tbody tr:hover {
+    background: #f5f7fa;
+}
+
+/* General Info */
+.general-info {
+    padding: 3rem 0;
+    background: #f5f7fa;
+}
+
+.general-info h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 2rem;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h3 {
+    color: #1e3c72;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.info-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.info-card strong {
+    color: #333;
+}
+
+/* Fare Calculator */
+.fare-calculator-section {
+    padding: 3rem 0;
+    background: white;
+}
+
+.calculator-card {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-card h2 {
+    color: #1e3c72;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.calculator-card > p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.calculator-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #1e3c72;
+}
+
+.calculate-btn {
+    background: #1e3c72;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.calculate-btn:hover {
+    background: #2a5298;
+}
+
+.fare-result {
+    margin-top: 1rem;
+}
+
+.result-success,
+.result-error {
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.result-success {
+    background: #e8f5e9;
+    border: 2px solid #4caf50;
+}
+
+.result-error {
+    background: #ffebee;
+    border: 2px solid #f44336;
+    color: #d32f2f;
+}
+
+.result-title {
+    font-size: 1.2rem;
+    color: #1e3c72;
+    margin-bottom: 0.5rem;
+}
+
+.result-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4caf50;
+    margin-bottom: 1rem;
+}
+
+.result-details {
+    color: #666;
+}
+
+.result-details p {
+    margin-bottom: 0.3rem;
+}
+
+.discount-text {
+    color: #4caf50;
+    font-weight: 500;
+}
+
+/* Fare Chart */
+.fare-chart-section {
+    padding: 3rem 0;
+    background: #f5f7fa;
+}
+
+.fare-chart-section h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 2rem;
+}
+
+.fare-table-container {
+    overflow-x: auto;
+}
+
+.fare-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.fare-table thead {
+    background: #1e3c72;
+    color: white;
+}
+
+.fare-table th,
+.fare-table td {
+    padding: 1rem;
+    text-align: left;
+}
+
+.fare-table tbody tr {
+    border-bottom: 1px solid #eee;
+}
+
+.fare-table tbody tr:hover {
+    background: #f5f7fa;
+}
+
+/* Route Fare */
+.route-fare-section {
+    padding: 3rem 0;
+    background: white;
+}
+
+.route-fare-section h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 2rem;
+}
+
+.route-fare-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.route-fare-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.route-fare-card:hover {
+    transform: translateY(-5px);
+}
+
+.route-fare-header {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.route-fare-header .route-badge {
+    background: white;
+    color: #1e3c72;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.route-fare-header h3 {
+    font-size: 1rem;
+}
+
+.route-fare-body {
+    padding: 1.5rem;
+}
+
+.fare-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #eee;
+}
+
+.fare-detail:last-child {
+    border-bottom: none;
+}
+
+.fare-detail span {
+    color: #666;
+}
+
+.fare-detail strong {
+    color: #1e3c72;
+    font-size: 1.1rem;
+}
+
+/* Concession */
+.concession-section {
+    padding: 3rem 0;
+    background: #f5f7fa;
+}
+
+.concession-section h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 2rem;
+}
+
+.concession-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.concession-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.concession-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.concession-card h3 {
+    color: #1e3c72;
+    margin-bottom: 1rem;
+}
+
+.concession-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.concession-card strong {
+    color: #4caf50;
+}
+
+/* Notes */
+.notes-section {
+    padding: 3rem 0;
+    background: white;
+}
+
+.notes-card {
+    background: #fff9e6;
+    border-left: 4px solid #ffc107;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.notes-card h3 {
+    color: #1e3c72;
+    margin-bottom: 1rem;
+}
+
+.notes-list {
+    list-style: none;
+}
+
+.notes-list li {
+    color: #666;
+    padding: 0.5rem 0;
+    line-height: 1.6;
+}
+
+/* Emergency Section */
+.emergency-section {
+    padding: 3rem 0;
+    background: white;
+}
+
+.emergency-section h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 2rem;
+}
+
+.emergency-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.emergency-card {
+    background: #ffebee;
+    border: 2px solid #f44336;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.emergency-card:hover {
+    transform: translateY(-5px);
+}
+
+.emergency-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.emergency-card h3 {
+    color: #d32f2f;
+    margin-bottom: 1rem;
+}
+
+.emergency-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #d32f2f;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+}
+
+.emergency-number:hover {
+    text-decoration: underline;
+}
+
+.emergency-card p {
+    color: #666;
+}
+
+/* Contact Info */
+.contact-info-section {
+    padding: 3rem 0;
+    background: #f5f7fa;
+}
+
+.contact-info-section h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 2rem;
+}
+
+.contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.contact-info-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info-card h3 {
+    color: #1e3c72;
+    margin-bottom: 1rem;
+}
+
+.contact-info-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0.3rem;
+}
+
+.contact-info-card a {
+    color: #1e3c72;
+    text-decoration: none;
+}
+
+.contact-info-card a:hover {
+    text-decoration: underline;
+}
+
+/* Feedback Section */
+.feedback-section {
+    padding: 3rem 0;
+    background: white;
+}
+
+.feedback-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.feedback-container h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 0.5rem;
+}
+
+.feedback-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.feedback-form {
+    background: #f5f7fa;
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.feedback-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.required {
+    color: #f44336;
+}
+
+.feedback-form input,
+.feedback-form select,
+.feedback-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.feedback-form input:focus,
+.feedback-form select:focus,
+.feedback-form textarea:focus {
+    border-color: #1e3c72;
+}
+
+.feedback-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.error-message {
+    display: none;
+    color: #f44336;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+.submit-btn {
+    width: 100%;
+    background: #1e3c72;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: #2a5298;
+}
+
+.success-message {
+    background: #e8f5e9;
+    border: 2px solid #4caf50;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.success-message h3 {
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+}
+
+.success-message p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.reset-form-btn {
+    background: #1e3c72;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.reset-form-btn:hover {
+    background: #2a5298;
+}
+
+/* FAQ */
+.faq-section {
+    padding: 3rem 0;
+    background: #f5f7fa;
+}
+
+.faq-section h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 2rem;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.faq-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.faq-card h3 {
+    color: #1e3c72;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.faq-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.faq-card a {
+    color: #1e3c72;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.faq-card a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+    background: #1a1a1a;
+    color: white;
+    padding: 3rem 0 1rem;
+    margin-top: 3rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.footer-section p {
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #333;
+    color: #999;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: #1e3c72;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu li {
+        margin: 0;
+    }
+
+    .nav-menu li a {
+        padding: 1rem;
+        display: block;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .search-container {
+        flex-direction: column;
+        border-radius: 12px;
+    }
+
+    .search-container input,
+    .search-container button {
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .hero {
+        padding: 2rem 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 1.5rem;
+    }
+
+    .route-card-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .route-number-badge {
+        width: 60px;
+        height: 60px;
+    }
+
+    .dropdown-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timing-info-row {
+        grid-template-columns: 1fr;
+    }
+
+    .fare-table {
+        font-size: 0.9rem;
+    }
+
+    .fare-table th,
+    .fare-table td {
+        padding: 0.5rem;
+    }
+}
+
+@media print {
+    .navbar,
+    .footer,
+    .search-section,
+    button {
+        display: none;
+    }
+
+    body {
+        background: white;
+    }
+
+    .route-card,
+    .timing-card {
+        break-inside: avoid;
+    }
+}
