@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Routes with Map - Mysuru Smart Bus</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional styles for map integration */
+        .route-map-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stops-list {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .stops-list h4 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stop-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stop-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stop-number {
+            background: #1e3c72;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .stop-name {
+            flex: 1;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .stop-marker {
+            color: #1e3c72;
+            font-size: 1.5rem;
+        }
+
+        .view-map-btn {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: background 0.3s;
+        }
+
+        .view-map-btn:hover {
+            background: #2a5298;
+        }
+
+        .route-details-expanded {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .route-details-expanded.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fare-display {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .fare-display .fare-amount {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .fare-display .fare-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.3rem;
+        }
+
+        .frequency-badge {
+            background: #e3f2fd;
+            color: #1e3c72;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .expand-icon {
+            color: white;
+            font-size: 1.5rem;
+            margin-left: auto;
+            transition: transform 0.3s;
+        }
+
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="bus-icon">🚌</span>
+                <span class="logo-text">Mysuru Smart Bus</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="routes.html" class="active">Routes</a></li>
+                <li><a href="timings.html">Timings</a></li>
+                <li><a href="fare.html">Fare</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>🗺️ Bus Routes with Map View</h1>
+            <p>Find your route and view stops on interactive map</p>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <section class="search-section">
+        <div class="container">
+            <!-- Text Search -->
+            <div class="search-box">
+                <input type="text" id="routeSearch" placeholder="Search by route number or place name...">
+                <button onclick="searchRoutes()">🔍 Search</button>
+            </div>
+
+            <!-- Source and Destination Dropdowns -->
+            <div class="filter-section">
+                <h3>Or Select Source & Destination:</h3>
+                <div class="dropdown-grid">
+                    <div class="dropdown-container">
+                        <label for="sourceSelect">From (Source):</label>
+                        <select id="sourceSelect" onchange="filterBySourceDestination()">
+                            <option value="">-- Select Source --</option>
+                            <option value="City Bus Stand">City Bus Stand</option>
+                            <option value="Mysore Palace">Mysore Palace</option>
+                            <option value="Railway Station">Railway Station</option>
+                            <option value="Kuvempunagar">Kuvempunagar</option>
+                            <option value="Chamundi Hill">Chamundi Hill</option>
+                            <option value="Gokulam">Gokulam</option>
+                            <option value="Jayanagar">Jayanagar</option>
+                            <option value="VV Mohalla">VV Mohalla</option>
+                            <option value="Hebbal">Hebbal</option>
+                            <option value="Vijayanagar">Vijayanagar</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-container">
+                        <label for="destSelect">To (Destination):</label>
+                        <select id="destSelect" onchange="filterBySourceDestination()">
+                            <option value="">-- Select Destination --</option>
+                            <option value="City Bus Stand">City Bus Stand</option>
+                            <option value="Mysore Palace">Mysore Palace</option>
+                            <option value="Railway Station">Railway Station</option>
+                            <option value="Kuvempunagar">Kuvempunagar</option>
+                            <option value="Chamundi Hill">Chamundi Hill</option>
+                            <option value="Gokulam">Gokulam</option>
+                            <option value="Jayanagar">Jayanagar</option>
+                            <option value="VV Mohalla">VV Mohalla</option>
+                            <option value="Hebbal">Hebbal</option>
+                            <option value="Vijayanagar">Vijayanagar</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="reset-btn" onclick="resetFilters()">🔄 Reset Filters</button>
+            </div>
+
+            <!-- Results Count -->
+            <div id="resultsCount" class="results-count"></div>
+        </div>
+    </section>
+
+    <!-- Routes Display Section -->
+    <section class="routes-display">
+        <div class="container">
+            <div id="routesContainer">
+                <!-- Routes will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mysuru Smart Bus</h3>
+                    <p>Making city bus travel easier for everyone</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="timings.html">Bus Timings</a></li>
+                        <li><a href="fare.html">Fare Information</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📞 Emergency: 1800-XXX-XXXX</p>
+                    <p>📧 info@mysurubus.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mysuru Smart Bus Information System | VTU IDT Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Enhanced bus routes data with coordinates for mapping
+        const busRoutes = [
+            {
+                number: '201',
+                name: 'City Bus Stand - Mysore Palace',
+                source: 'City Bus Stand',
+                destination: 'Mysore Palace',
+                stops: [
+                    { name: 'City Bus Stand', lat: 12.3051, lng: 76.6553 },
+                    { name: 'Gun House Circle', lat: 12.3045, lng: 76.6520 },
+                    { name: 'Mandya Road', lat: 12.3038, lng: 76.6495 },
+                    { name: 'MIT Thandavapura College', lat: 12.3030, lng: 76.6475 },
+                    { name: 'Thandavapura', lat: 12.3025, lng: 76.6460 }
+                ],
+                firstBus: '6:00 AM',
+                lastBus: '9:30 PM',
+                frequency: 'Every 40 minutes',
+                fare: '₹25'
+            },
+            {
+                number: '301',
+                name: 'Kuvempunagar - Railway Station',
+                source: 'Kuvempunagar',
+                destination: 'Railway Station',
+                stops: [
+                    { name: 'Kuvempunagar', lat: 12.2863, lng: 76.6425 },
+                    { name: 'Saraswathipuram', lat: 12.2925, lng: 76.6445 },
+                    { name: 'Suburban Bus Stand', lat: 12.2988, lng: 76.6475 },
+                    { name: 'Railway Station', lat: 12.3076, lng: 76.6421 }
+                ],
+                firstBus: '5:45 AM',
+                lastBus: '10:00 PM',
+                frequency: 'Every 20 min',
+                fare: '₹12 - ₹18'
+            },
+            {
+                number: '101',
+                name: 'Chamundi Hill - City Center',
+                source: 'Chamundi Hill',
+                destination: 'City Bus Stand',
+                stops: [
+                    { name: 'Chamundi Hill', lat: 12.2722, lng: 76.6729 },
+                    { name: 'Chamundi Foot Hills', lat: 12.2825, lng: 76.6680 },
+                    { name: 'Yadavagiri', lat: 12.2935, lng: 76.6610 },
+                    { name: 'City Bus Stand', lat: 12.3051, lng: 76.6553 }
+                ],
+                firstBus: '6:30 AM',
+                lastBus: '8:30 PM',
+                frequency: 'Every 30 min',
+                fare: '₹15 - ₹25'
+            },
+            {
+                number: '401',
+                name: 'Gokulam - VV Mohalla',
+                source: 'Gokulam',
+                destination: 'VV Mohalla',
+                stops: [
+                    { name: 'Gokulam', lat: 12.2900, lng: 76.6300 },
+                    { name: 'Kuvempunagar', lat: 12.2863, lng: 76.6425 },
+                    { name: 'Nazarbad', lat: 12.2975, lng: 76.6500 },
+                    { name: 'VV Mohalla', lat: 12.3100, lng: 76.6450 }
+                ],
+                firstBus: '6:00 AM',
+                lastBus: '9:00 PM',
+                frequency: 'Every 25 min',
+                fare: '₹10 - ₹20'
+            },
+            {
+                number: '501',
+                name: 'Hebbal - Jayanagar',
+                source: 'Hebbal',
+                destination: 'Jayanagar',
+                stops: [
+                    { name: 'Hebbal', lat: 12.3400, lng: 76.6200 },
+                    { name: 'Hootagalli', lat: 12.3300, lng: 76.6300 },
+                    { name: 'Hinkal', lat: 12.3200, lng: 76.6400 },
+                    { name: 'Jayanagar', lat: 12.3150, lng: 76.6500 }
+                ],
+                firstBus: '6:15 AM',
+                lastBus: '9:30 PM',
+                frequency: 'Every 20 min',
+                fare: '₹12 - ₹22'
+            },
+            {
+                number: '601',
+                name: 'Vijayanagar - Railway Station',
+                source: 'Vijayanagar',
+                destination: 'Railway Station',
+                stops: [
+                    { name: 'Vijayanagar', lat: 12.3200, lng: 76.6750 },
+                    { name: 'Bannimantap', lat: 12.3150, lng: 76.6680 },
+                    { name: 'Devaraja Market', lat: 12.3100, lng: 76.6550 },
+                    { name: 'Railway Station', lat: 12.3076, lng: 76.6421 }
+                ],
+                firstBus: '5:30 AM',
+                lastBus: '10:30 PM',
+                frequency: 'Every 15 min',
+                fare: '₹10 - ₹18'
+            }
+        ];
+
+        let allRoutes = [...busRoutes];
+
+        // Load all routes when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchParam = urlParams.get('search');
+            
+            if (searchParam) {
+                document.getElementById('routeSearch').value = searchParam;
+                searchRoutes();
+            } else {
+                displayRoutes(allRoutes);
+            }
+        });
+
+        // Function to display routes with map integration
+        function displayRoutes(routes) {
+            const container = document.getElementById('routesContainer');
+            const resultsCount = document.getElementById('resultsCount');
+            
+            resultsCount.textContent = `Showing ${routes.length} route(s)`;
+            
+            if (routes.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">🔍</div>
+                        <h3>No routes found</h3>
+                        <p>Try different search terms or reset filters</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            routes.forEach((route, index) => {
+                const routeId = `route-${index}`;
+                html += `
+                    <div class="route-card">
+                        <div class="route-card-header" onclick="toggleRouteDetails('${routeId}', this)" style="cursor: pointer;">
+                            <div class="route-number-badge">${route.number}</div>
+                            <div class="route-title">
+                                <h3>${route.name}</h3>
+                                <p class="route-path">${route.source} ➜ ${route.destination}</p>
+                                <span class="frequency-badge">⏱️ ${route.frequency}</span>
+                            </div>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <div class="route-card-body">
+                            <div class="route-info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">⏰ First Bus:</span>
+                                    <span class="info-value">${route.firstBus}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">🌙 Last Bus:</span>
+                                    <span class="info-value">${route.lastBus}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">💰 Fare:</span>
+                                    <span class="info-value">${route.fare}</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Expandable Details -->
+                            <div class="route-details-expanded" id="${routeId}">
+                                <!-- Stops List -->
+                                <div class="stops-list">
+                                    <h4>📍 STOPS (${route.stops.length})</h4>
+                                    ${route.stops.map((stop, stopIndex) => `
+                                        <div class="stop-item">
+                                            <div class="stop-number">${stopIndex + 1}</div>
+                                            <div class="stop-name">${stop.name}</div>
+                                            <div class="stop-marker">📍</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+
+                                <!-- Fare Display -->
+                                <div class="fare-display">
+                                    <div class="fare-label">💰 FARE</div>
+                                    <div class="fare-amount">${route.fare}</div>
+                                </div>
+
+                                <!-- View on Map Button -->
+                                <button class="view-map-btn" onclick="openGoogleMaps('${route.number}')">
+                                    🗺️ View Full Route on Map
+                                </button>
+
+                                <!-- Map Container Note -->
+                                <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center;">
+                                    <p style="margin: 0; color: #1e3c72;">
+                                        <strong>📍 Map Preview:</strong> Click "View Full Route on Map" to see the complete route with all stops in Google Maps
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Toggle route details
+        function toggleRouteDetails(routeId, headerElement) {
+            const details = document.getElementById(routeId);
+            const icon = headerElement.querySelector('.expand-icon');
+            
+            details.classList.toggle('active');
+            icon.classList.toggle('rotated');
+        }
+
+        // Open in Google Maps app with all stops
+        function openGoogleMaps(routeNumber) {
+            const route = allRoutes.find(r => r.number === routeNumber);
+            if (!route) return;
+            
+            const origin = `${route.stops[0].lat},${route.stops[0].lng}`;
+            const destination = `${route.stops[route.stops.length-1].lat},${route.stops[route.stops.length-1].lng}`;
+            
+            // Create waypoints from middle stops
+            let waypoints = '';
+            if (route.stops.length > 2) {
+                const middle = route.stops.slice(1, -1);
+                waypoints = middle.map(stop => `${stop.lat},${stop.lng}`).join('|');
+            }
+            
+            // Build Google Maps URL
+            let url = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
+            if (waypoints) {
+                url += `&waypoints=${waypoints}`;
+            }
+            
+            window.open(url, '_blank');
+        }
+
+        // Search routes by text
+        function searchRoutes() {
+            const searchTerm = document.getElementById('routeSearch').value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                displayRoutes(allRoutes);
+                return;
+            }
+            
+            const filtered = allRoutes.filter(route => {
+                return route.number.toLowerCase().includes(searchTerm) ||
+                       route.name.toLowerCase().includes(searchTerm) ||
+                       route.source.toLowerCase().includes(searchTerm) ||
+                       route.destination.toLowerCase().includes(searchTerm) ||
+                       route.stops.some(stop => stop.name.toLowerCase().includes(searchTerm));
+            });
+            
+            displayRoutes(filtered);
+        }
+
+        // Filter by source and destination
+        function filterBySourceDestination() {
+            const source = document.getElementById('sourceSelect').value;
+            const destination = document.getElementById('destSelect').value;
+            
+            if (source === '' && destination === '') {
+                displayRoutes(allRoutes);
+                return;
+            }
+            
+            const filtered = allRoutes.filter(route => {
+                const matchSource = source === '' || route.source === source || route.stops.some(s => s.name === source);
+                const matchDest = destination === '' || route.destination === destination || route.stops.some(s => s.name === destination);
+                return matchSource && matchDest;
+            });
+            
+            displayRoutes(filtered);
+        }
+
+        // Reset all filters
+        function resetFilters() {
+            document.getElementById('routeSearch').value = '';
+            document.getElementById('sourceSelect').value = '';
+            document.getElementById('destSelect').value = '';
+            displayRoutes(allRoutes);
+        }
+
+        // Allow Enter key to trigger search
+        document.getElementById('routeSearch').addEventListener('keyup', searchRoutes);
+    </script>
+</body>
+</html>
